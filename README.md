@@ -25,7 +25,7 @@ A Model Context Protocol (MCP) server for [Apollo.io](https://apollo.io) - the l
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/apollo-mcp-server.git
+git clone https://github.com/BlockchainRev/apollo-mcp-server.git
 cd apollo-mcp-server
 
 # Install dependencies
