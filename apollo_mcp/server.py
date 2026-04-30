@@ -1,4 +1,5 @@
 import os
+import uvicorn
 from mcp.server.fastmcp import FastMCP
 from apollo_mcp.tools import register_all_tools
 
@@ -14,8 +15,12 @@ def run_server():
     port = int(os.environ.get("PORT", 8000))
     mcp.settings.host = "0.0.0.0"
     mcp.settings.port = port
-    mcp.settings.allowed_hosts = ["*"]
-    mcp.run(transport="sse")
+    uvicorn.run(
+        mcp.sse_app(),
+        host="0.0.0.0",
+        port=port,
+        forwarded_allow_ips="*"
+    )
 
 
 _mcp = None
