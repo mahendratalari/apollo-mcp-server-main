@@ -1,6 +1,3 @@
-"""
-Apollo MCP Server
-"""
 import os
 from mcp.server.fastmcp import FastMCP
 from apollo_mcp.tools import register_all_tools
@@ -17,6 +14,7 @@ def run_server():
     port = int(os.environ.get("PORT", 8000))
     mcp.settings.host = "0.0.0.0"
     mcp.settings.port = port
+    mcp.settings.allowed_hosts = ["*"]
     mcp.run(transport="sse")
 
 
