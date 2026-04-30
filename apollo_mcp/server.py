@@ -13,13 +13,12 @@ def create_server() -> FastMCP:
 def run_server():
     mcp = create_server()
     port = int(os.environ.get("PORT", 8000))
-    mcp.settings.host = "0.0.0.0"
-    mcp.settings.port = port
     uvicorn.run(
         mcp.sse_app(),
         host="0.0.0.0",
         port=port,
-        forwarded_allow_ips="*"
+        forwarded_allow_ips="*",
+        proxy_headers=True
     )
 
 
