@@ -12,6 +12,8 @@ Provides 34 tools for sales outreach automation including:
 - Deal/opportunity pipeline
 - Analytics and reporting
 """
+import os
+import uvicorn
 from mcp.server.fastmcp import FastMCP
 from apollo_mcp.tools import register_all_tools
 
@@ -31,7 +33,9 @@ def create_server() -> FastMCP:
 def run_server():
     """Run the Apollo MCP server."""
     mcp = create_server()
-    mcp.run(transport="sse")
+    port = int(os.environ.get("PORT", 8000))
+    app = mcp.get_asgi_app()
+    uvicorn.run(app, host="0.0.0.0", port=port)
 
 
 # Lazy-loaded server instance
